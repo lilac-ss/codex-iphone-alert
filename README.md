@@ -6,6 +6,8 @@ MacからApple Web Pushへ直接送信し、登録用サーバーや有料サー
 通知は1分ごと、発生から30分未満まで。ロック解除したMacでCodexを前面にすると停止します。
 本文は固定文と発生時刻だけです。
 
+[公開PWA](https://lilac-ss.github.io/codex-iphone-alert/) / [検証・配信履歴](https://github.com/lilac-ss/codex-iphone-alert/actions)
+
 ## 導入
 
 Node.js 22以降（推奨24 LTS）、macOS、Xcode Command Line Toolsを使用します。

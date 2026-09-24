@@ -33,6 +33,8 @@ index.html style.css app.js sw.js manifest.webmanifest
 icon.svg icon-180.png icon-192.png icon-512.png .nojekyll
 ```
 
+うち.nojekyllはビルドマーカーです。Pagesからの直接取得は404になるため、HTTPSの配信照合は残り9個に対して行います。
+
 1. テスト、check、git diff --checkを完了し、対象だけをコミットします。
 2. GitHubの公開リポジトリでPagesのソースをGitHub Actionsに設定します。
 3. pages.ymlはmainへのpushまたは手動実行で検証し、distだけを配信します。

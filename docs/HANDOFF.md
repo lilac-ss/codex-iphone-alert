@@ -3,10 +3,15 @@
 ## 現在の進捗（2026-09-24）
 
 Mac用Node.js補助ツール、Swiftの状態検出、静的PWA、GitHub Pages workflowを実装済み。
-自動テスト30件、構文・公開範囲検査、Swiftビルド、依存監査が成功。
+自動テスト32件、構文・公開範囲検査、Swiftビルド、依存監査が成功。
 実装上の境界条件は `ARCHITECTURE.md`、実コマンドは `DEVELOPMENT.md`、確認結果は `VERIFICATION.md` に記載。
 
-公開・Mac導入とiPhone本人操作は、実績が得られた時点で検証記録を更新する。
+GitHub Pagesを https://lilac-ss.github.io/codex-iphone-alert/ へ公開済み。
+MacのLaunchAgentは導入・稼働済み。実環境で解除・元設定の完全一致を確認してから再導入した。
+所有者専用の状態ディレクトリと既存notify以外の設定不変も検査済み。
+残りはiPhoneの許可・AirDrop登録、本人によるhook信頼確認、実際のイベント・再通知・停止の検証。
+登録ファイルの内容をチャットやログに貼らず、Mac上でCLIのimportを実行する。
+現在の登録URLは `npm run cli -- registration-url` で取得できる。公開鍵だけを含む。
 実際のイベント発火、ロック遷移、iPhone到達を自動テストの成功と混同しない。
 
 以下の事前調査・依頼は元の引き継ぎ記録として残す。

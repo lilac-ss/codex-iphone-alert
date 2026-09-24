@@ -15,7 +15,7 @@ function bytes(value) {
 }
 function refresh() {
   subscribe.disabled = !registration || !publicKey || !standalone || Boolean(subscription);
-  exportButton.disabled = !subscription;
+  exportButton.disabled = !subscription || !publicKey;
   if (subscription) status.textContent = '通知を登録しました。登録ファイルをMacへ送ってください。';
   else if (!standalone) status.textContent = 'ホーム画面に追加したアイコンから開いてください。';
   else if (!publicKey) { status.textContent = 'Macの登録URLを開くか、下で公開鍵を設定してください。'; document.querySelector('#key-details').open = true; }
@@ -23,6 +23,8 @@ function refresh() {
   else status.textContent = '準備できました。「通知を有効にする」を押してください。';
 }
 async function initialize() {
+  subscribe.disabled = true;
+  exportButton.disabled = true;
   try {
     const fragmentKey = new URLSearchParams(location.hash.slice(1)).get('key');
     const candidate = fragmentKey || localStorage.getItem(storageKey);
@@ -73,4 +75,5 @@ exportButton.addEventListener('click', () => {
     status.textContent = '保存した登録ファイルを、AirDropなどでMacへ送ってください。';
   }
 });
+window.addEventListener('hashchange', initialize);
 initialize();
