@@ -1,0 +1,33 @@
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+coverage/
+.nyc_output/
+
+# Local configuration and runtime state
+.env
+.env.*
+!.env.example
+secrets/
+private/
+state/
+.local/
+*.local.json
+*.local.toml
+*.log
+
+# Device registrations and VAPID private material
+subscription.json
+subscription-*.json
+push-subscription*.json
+vapid.json
+vapid-private*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# OS and editor files
+.DS_Store
+.idea/
