@@ -21,6 +21,11 @@ state/
 subscription.json
 subscription-*.json
 push-subscription*.json
+codex-alert-registration*.json
+device.json
+settings.json
+integration.json
+engine.json
 vapid.json
 vapid-private*
 *.pem

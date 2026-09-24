@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#132924">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Codex Alert">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+  <title>Codex Alert</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icon-180.png">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <main>
+    <header><img src="./icon.svg" alt="" width="44" height="44"><span>CODEX ALERT</span></header>
+    <p class="eyebrow">Macから離れていても</p>
+    <h1>終わったら、<br>iPhoneへ。</h1>
+    <p class="intro">Codexの完了と承認要求をお知らせ。<br>MacでCodexを開くと、再通知が止まります。</p>
+    <section class="card" aria-labelledby="setup-title">
+      <h2 id="setup-title">このiPhoneを登録</h2>
+      <ol>
+        <li><strong>ホーム画面に追加</strong><span>Safariの共有メニューから追加し、そのアイコンで開きます。iOS 16.4以降に対応。</span></li>
+        <li><strong>通知を許可</strong><span>下のボタンで通知を有効にします。</span></li>
+        <li><strong>登録ファイルをMacへ</strong><span>「登録ファイルを共有」からAirDropで送り、Macの補助ツールへ取り込みます。</span></li>
+      </ol>
+      <p id="status" role="status" aria-live="polite">準備しています…</p>
+      <button id="subscribe" disabled>通知を有効にする</button>
+      <button id="export" class="secondary" disabled>登録ファイルを共有</button>
+      <details id="key-details"><summary>公開鍵を設定</summary>
+        <p>Macで表示した登録URLを、このホーム画面アプリで開けない場合に使います。</p>
+        <label for="key">VAPID公開鍵</label><textarea id="key" rows="3" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+        <button id="save-key" class="secondary">公開鍵を保存</button>
+      </details>
+    </section>
+    <section class="notes"><h2>通知について</h2>
+      <p>1分ごと、発生から最大30分。通知の内容は固定文と発生時刻だけです。自動審査される承認要求も含む場合があります。</p>
+      <p>Macが起動し、スリープせず、ネットワークにつながっている間に送信します。音はiPhoneの通知設定・集中モード・消音設定に従います。</p>
+      <p>この画面から再通知を止めることはできません。ロック解除したMacでCodexを前面にしてください。送信済みの通知は、その後に届く場合があります。</p>
+    </section>
+    <footer>登録情報は外部の登録サーバーへ送信しません。<br>登録ファイルはMacへ取り込んだ後、共有先やダウンロードから削除してください。</footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,24 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdirSync,writeFileSync,readFileSync,existsSync,statSync } from 'node:fs';
+import path from 'node:path';
+import { parse } from 'smol-toml';
+import { install,uninstall } from '../lib/install.mjs';
+import { atomicJson,readJson } from '../lib/store.mjs';
+import { temporary } from './helpers.mjs';
+test('導入を繰り返しても二重登録せず、設定変更を保って解除',t=>{
+  const base=temporary(t),home=path.join(base,'private'),codexHome=path.join(base,'codex'),agents=path.join(base,'agents'),root=path.join(base,'source');
+  for(const d of [home,codexHome,agents,...['bin','lib','node_modules','build'].map(d=>path.join(root,d))]) mkdirSync(d,{recursive:true});
+  for(const file of ['package.json','package-lock.json','build/mac-state']) writeFileSync(path.join(root,file),'fake');
+  const original='notify=["/fake/existing", "turn-ended"]\nmodel="fake"\n';writeFileSync(path.join(codexHome,'config.toml'),original);
+  atomicJson(path.join(home,'settings.json'),{});
+  const opts={activate:false,codexHome,agents,root};install(home,opts);
+  assert.equal(install(home,opts).alreadyInstalled,true);
+  assert.equal(readJson(path.join(codexHome,'hooks.json')).hooks.PermissionRequest.length,1);
+  writeFileSync(path.join(codexHome,'config.toml'),readFileSync(path.join(codexHome,'config.toml'),'utf8')+'\n[unrelated]\na=3\n');
+  uninstall(home,{activate:false});
+  assert.equal(readFileSync(path.join(codexHome,'config.toml'),'utf8'),original+'\n[unrelated]\na=3\n');
+  assert.deepEqual(parse(readFileSync(path.join(codexHome,'config.toml'),'utf8')).notify,['/fake/existing','turn-ended']);
+  assert.equal(existsSync(path.join(codexHome,'hooks.json')),false);assert.equal(existsSync(path.join(home,'integration.json')),false);
+  assert.equal(statSync(path.join(home,'backup/config-before.toml')).mode&0o777,0o600);
+});

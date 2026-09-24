@@ -1,0 +1,15 @@
+{
+  "name": "codex-iphone-alert",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.0.0" },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "build": "node scripts/build.mjs",
+    "build:native": "node scripts/build-native.mjs",
+    "cli": "node bin/alert.mjs"
+  },
+  "dependencies": { "smol-toml": "1.9.0", "web-push": "3.6.7" }
+}
